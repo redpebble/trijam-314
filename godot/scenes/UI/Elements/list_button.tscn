@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1i0rid82eqlh"]
+
+[ext_resource type="Script" path="res://scenes/UI/Elements/list_button.gd" id="1_mws6f"]
+
+[node name="ListButton" type="Button"]
+custom_minimum_size = Vector2(120, 0)
+focus_mode = 0
+toggle_mode = true
+action_mode = 0
+text = "Action Name"
+script = ExtResource("1_mws6f")

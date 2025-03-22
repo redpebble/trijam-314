@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://l1np6ys8mw12"]
+
+[ext_resource type="PackedScene" uid="uid://d1i0rid82eqlh" path="res://scenes/UI/Elements/list_button.tscn" id="1_mujrc"]
+[ext_resource type="Script" path="res://scenes/UI/pause_menu.gd" id="1_oyirl"]
+[ext_resource type="Script" path="res://scenes/UI/action_list.gd" id="2_n8bip"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hf270"]
+font_size = 50
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_oyirl")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="MenuLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Game Paused"
+label_settings = SubResource("LabelSettings_hf270")
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="ActionList" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+script = ExtResource("2_n8bip")
+
+[node name="Jump" parent="MarginContainer/VBoxContainer/ActionList" instance=ExtResource("1_mujrc")]
+layout_mode = 2
+
+[node name="Crouch" parent="MarginContainer/VBoxContainer/ActionList" instance=ExtResource("1_mujrc")]
+layout_mode = 2
+
+[node name="Resume" type="Button" parent="MarginContainer/VBoxContainer" groups=["ScopeOptions"]]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Resume"

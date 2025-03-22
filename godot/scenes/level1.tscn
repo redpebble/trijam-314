@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=3 uid="uid://bpwlmjan0tmis"]
+
+[ext_resource type="Script" path="res://scenes/level.gd" id="1_1g0je"]
+[ext_resource type="PackedScene" uid="uid://d1a3impy5lljt" path="res://scenes/character.tscn" id="1_rapfa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fruhu"]
+size = Vector2(400, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uwnvl"]
+size = Vector2(500, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y4mk5"]
+size = Vector2(50, 600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xjqpe"]
+size = Vector2(100, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4bu4v"]
+size = Vector2(191, 500)
+
+[node name="Level1" type="Node2D"]
+script = ExtResource("1_1g0je")
+
+[node name="Floor1" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor1"]
+position = Vector2(200, 500)
+shape = SubResource("RectangleShape2D_fruhu")
+
+[node name="Floor2" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor2"]
+position = Vector2(750, 500)
+shape = SubResource("RectangleShape2D_uwnvl")
+
+[node name="Wall1" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall1"]
+position = Vector2(-25, 300)
+shape = SubResource("RectangleShape2D_y4mk5")
+
+[node name="Wall2" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2"]
+position = Vector2(1026, 300)
+shape = SubResource("RectangleShape2D_y4mk5")
+
+[node name="Hazard1" type="StaticBody2D" parent="." groups=["hazards"]]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard1"]
+position = Vector2(450, 500)
+shape = SubResource("RectangleShape2D_xjqpe")
+debug_color = Color(0.890877, 0.300042, 0.329821, 0.42)
+
+[node name="Hazard2" type="StaticBody2D" parent="." groups=["hazards"]]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard2"]
+position = Vector2(752, 200)
+shape = SubResource("RectangleShape2D_4bu4v")
+debug_color = Color(0.890877, 0.300042, 0.329821, 0.42)
+
+[node name="Hazard3" type="StaticBody2D" parent="." groups=["hazards"]]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard3"]
+position = Vector2(1073, 233)
+shape = SubResource("RectangleShape2D_4bu4v")
+debug_color = Color(0.890877, 0.300042, 0.329821, 0.42)
+
+[node name="Start" type="Node2D" parent="."]
+position = Vector2(16, 471)
+
+[node name="Character" parent="." instance=ExtResource("1_rapfa")]
+position = Vector2(75, 389)
+
+[connection signal="hit_hazard" from="Character" to="." method="_on_character_hit_hazard"]

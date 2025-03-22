@@ -1,3 +1,14 @@
-[gd_scene format=3 uid="uid://d1a3impy5lljt"]
+[gd_scene load_steps=3 format=3 uid="uid://d1a3impy5lljt"]
 
-[node name="Character" type="Node2D"]
+[ext_resource type="Script" path="res://scenes/character.gd" id="1_fg13i"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ygktd"]
+height = 40.0
+
+[node name="Character" type="CharacterBody2D"]
+collision_mask = 6
+script = ExtResource("1_fg13i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -20)
+shape = SubResource("CapsuleShape2D_ygktd")

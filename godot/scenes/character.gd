@@ -29,7 +29,9 @@ func _process(_delta: float) -> void:
 	
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
-		if collision.get_collider().is_in_group("hazards"):
+		if collision.get_collider().is_in_group("hazard"):
+			hit_hazard.emit()
+		if collision.get_collider().is_in_group("goal"):
 			hit_hazard.emit()
 
 func _on_pause_menu_action_selected(action:String) -> void:

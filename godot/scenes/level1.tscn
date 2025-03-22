@@ -1,14 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://bpwlmjan0tmis"]
+[gd_scene load_steps=11 format=3 uid="uid://bpwlmjan0tmis"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_1g0je"]
 [ext_resource type="PackedScene" uid="uid://d1a3impy5lljt" path="res://scenes/character.tscn" id="1_rapfa"]
 [ext_resource type="PackedScene" uid="uid://l1np6ys8mw12" path="res://scenes/UI/pause_menu.tscn" id="2_nep4c"]
+[ext_resource type="Script" path="res://scenes/camera.gd" id="2_p0ldi"]
+[ext_resource type="Script" path="res://scenes/level_geometry.gd" id="4_7pf31"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fruhu"]
 size = Vector2(400, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uwnvl"]
-size = Vector2(500, 50)
+size = Vector2(1368, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xjqpe"]
 size = Vector2(100, 50)
@@ -16,51 +18,88 @@ size = Vector2(100, 50)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4bu4v"]
 size = Vector2(191, 500)
 
-[node name="Level1" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ug4if"]
+size = Vector2(145.5, 428.5)
+
+[node name="Level1" type="Node2D" groups=["goal"]]
 script = ExtResource("1_1g0je")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(500, 300)
+script = ExtResource("2_p0ldi")
 
 [node name="PauseMenu" parent="." instance=ExtResource("2_nep4c")]
 
 [node name="Floor1" type="StaticBody2D" parent="."]
 collision_layer = 2
+script = ExtResource("4_7pf31")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor1"]
 position = Vector2(200, 500)
 shape = SubResource("RectangleShape2D_fruhu")
 
+[node name="ColorRect" type="ColorRect" parent="Floor1"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.462745, 0.509804, 0.827451, 1)
+
 [node name="Floor2" type="StaticBody2D" parent="."]
 collision_layer = 2
+script = ExtResource("4_7pf31")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor2"]
-position = Vector2(750, 500)
+position = Vector2(1184, 500)
 shape = SubResource("RectangleShape2D_uwnvl")
 
-[node name="Hazard1" type="StaticBody2D" parent="." groups=["hazards"]]
+[node name="ColorRect" type="ColorRect" parent="Floor2"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.464363, 0.511613, 0.827328, 1)
+
+[node name="Hazard1" type="StaticBody2D" parent="." groups=["hazard"]]
 collision_layer = 4
+script = ExtResource("4_7pf31")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard1"]
 position = Vector2(450, 500)
 shape = SubResource("RectangleShape2D_xjqpe")
 debug_color = Color(0.890877, 0.300042, 0.329821, 0.42)
 
-[node name="Hazard2" type="StaticBody2D" parent="." groups=["hazards"]]
+[node name="ColorRect" type="ColorRect" parent="Hazard1"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.737255, 0.298039, 0.223529, 1)
+
+[node name="Hazard2" type="StaticBody2D" parent="." groups=["hazard"]]
 collision_layer = 4
+script = ExtResource("4_7pf31")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard2"]
-position = Vector2(752, 200)
+position = Vector2(1044, 200)
 shape = SubResource("RectangleShape2D_4bu4v")
 debug_color = Color(0.890877, 0.300042, 0.329821, 0.42)
 
-[node name="Hazard3" type="StaticBody2D" parent="." groups=["hazards"]]
-collision_layer = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard3"]
-position = Vector2(1073, 233)
-shape = SubResource("RectangleShape2D_4bu4v")
-debug_color = Color(0.890877, 0.300042, 0.329821, 0.42)
+[node name="ColorRect" type="ColorRect" parent="Hazard2"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.737944, 0.299102, 0.223276, 1)
 
 [node name="Start" type="Node2D" parent="."]
 position = Vector2(16, 471)
+
+[node name="End" type="StaticBody2D" parent="." groups=["goal"]]
+collision_layer = 8
+script = ExtResource("4_7pf31")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="End"]
+position = Vector2(1832.25, 283.25)
+shape = SubResource("RectangleShape2D_ug4if")
+debug_color = Color(0.309561, 0.613737, 0.370076, 0.42)
+
+[node name="ColorRect" type="ColorRect" parent="End"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.243466, 0.545487, 0.364072, 1)
 
 [node name="Character" parent="." instance=ExtResource("1_rapfa")]
 position = Vector2(75, 389)

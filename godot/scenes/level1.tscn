@@ -2,15 +2,13 @@
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_1g0je"]
 [ext_resource type="PackedScene" uid="uid://d1a3impy5lljt" path="res://scenes/character.tscn" id="1_rapfa"]
+[ext_resource type="PackedScene" uid="uid://l1np6ys8mw12" path="res://scenes/UI/pause_menu.tscn" id="2_nep4c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fruhu"]
 size = Vector2(400, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uwnvl"]
 size = Vector2(500, 50)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_y4mk5"]
-size = Vector2(50, 600)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xjqpe"]
 size = Vector2(100, 50)
@@ -20,6 +18,8 @@ size = Vector2(191, 500)
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_1g0je")
+
+[node name="PauseMenu" parent="." instance=ExtResource("2_nep4c")]
 
 [node name="Floor1" type="StaticBody2D" parent="."]
 collision_layer = 2
@@ -34,20 +34,6 @@ collision_layer = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor2"]
 position = Vector2(750, 500)
 shape = SubResource("RectangleShape2D_uwnvl")
-
-[node name="Wall1" type="StaticBody2D" parent="."]
-collision_layer = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall1"]
-position = Vector2(-25, 300)
-shape = SubResource("RectangleShape2D_y4mk5")
-
-[node name="Wall2" type="StaticBody2D" parent="."]
-collision_layer = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2"]
-position = Vector2(1026, 300)
-shape = SubResource("RectangleShape2D_y4mk5")
 
 [node name="Hazard1" type="StaticBody2D" parent="." groups=["hazards"]]
 collision_layer = 4
@@ -79,4 +65,5 @@ position = Vector2(16, 471)
 [node name="Character" parent="." instance=ExtResource("1_rapfa")]
 position = Vector2(75, 389)
 
+[connection signal="action_selected" from="PauseMenu" to="Character" method="_on_pause_menu_action_selected"]
 [connection signal="hit_hazard" from="Character" to="." method="_on_character_hit_hazard"]

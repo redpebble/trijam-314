@@ -9,7 +9,7 @@ var is_paused = false : set = set_paused
 
 
 func _ready() -> void:
-	set_paused(true)
+	set_paused(false)
 	resume_button.pressed.connect(set_paused.bind(false))
 
 func _process(_delta: float) -> void:

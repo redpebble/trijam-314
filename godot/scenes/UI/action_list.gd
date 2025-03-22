@@ -4,6 +4,7 @@ extends HBoxContainer
 
 func _ready() -> void:
 	connect_signals()
+	button_nodes[0].button_pressed = true
 
 func _on_button_selected(b):
 	var other_buttons = button_nodes.duplicate()

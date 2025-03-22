@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bpwlmjan0tmis"]
+[gd_scene load_steps=15 format=3 uid="uid://bpwlmjan0tmis"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_1g0je"]
 [ext_resource type="PackedScene" uid="uid://d1a3impy5lljt" path="res://scenes/character.tscn" id="1_rapfa"]
@@ -6,20 +6,32 @@
 [ext_resource type="Script" path="res://scenes/camera.gd" id="2_p0ldi"]
 [ext_resource type="Script" path="res://scenes/level_geometry.gd" id="4_7pf31"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fruhu"]
-size = Vector2(400, 50)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uwnvl"]
-size = Vector2(1368, 50)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xjqpe"]
-size = Vector2(100, 50)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4bu4v"]
-size = Vector2(191, 500)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ug4if"]
 size = Vector2(145.5, 428.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fruhu"]
+size = Vector2(384, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xjqpe"]
+size = Vector2(96, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uwnvl"]
+size = Vector2(144, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4bu4v"]
+size = Vector2(575.875, 208)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1s248"]
+size = Vector2(3392, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tla6a"]
+size = Vector2(319.938, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ednv"]
+size = Vector2(8, 56)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vligy"]
+size = Vector2(560, 64)
 
 [node name="Level1" type="Node2D" groups=["goal"]]
 script = ExtResource("1_1g0je")
@@ -30,69 +42,18 @@ script = ExtResource("2_p0ldi")
 
 [node name="PauseMenu" parent="." instance=ExtResource("2_nep4c")]
 
-[node name="Floor1" type="StaticBody2D" parent="."]
-collision_layer = 2
-script = ExtResource("4_7pf31")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor1"]
-position = Vector2(200, 500)
-shape = SubResource("RectangleShape2D_fruhu")
-
-[node name="ColorRect" type="ColorRect" parent="Floor1"]
-offset_right = 40.0
-offset_bottom = 40.0
-color = Color(0.462745, 0.509804, 0.827451, 1)
-
-[node name="Floor2" type="StaticBody2D" parent="."]
-collision_layer = 2
-script = ExtResource("4_7pf31")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor2"]
-position = Vector2(1184, 500)
-shape = SubResource("RectangleShape2D_uwnvl")
-
-[node name="ColorRect" type="ColorRect" parent="Floor2"]
-offset_right = 40.0
-offset_bottom = 40.0
-color = Color(0.464363, 0.511613, 0.827328, 1)
-
-[node name="Hazard1" type="StaticBody2D" parent="." groups=["hazard"]]
-collision_layer = 4
-script = ExtResource("4_7pf31")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard1"]
-position = Vector2(450, 500)
-shape = SubResource("RectangleShape2D_xjqpe")
-debug_color = Color(0.890877, 0.300042, 0.329821, 0.42)
-
-[node name="ColorRect" type="ColorRect" parent="Hazard1"]
-offset_right = 40.0
-offset_bottom = 40.0
-color = Color(0.737255, 0.298039, 0.223529, 1)
-
-[node name="Hazard2" type="StaticBody2D" parent="." groups=["hazard"]]
-collision_layer = 4
-script = ExtResource("4_7pf31")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard2"]
-position = Vector2(1044, 200)
-shape = SubResource("RectangleShape2D_4bu4v")
-debug_color = Color(0.890877, 0.300042, 0.329821, 0.42)
-
-[node name="ColorRect" type="ColorRect" parent="Hazard2"]
-offset_right = 40.0
-offset_bottom = 40.0
-color = Color(0.737944, 0.299102, 0.223276, 1)
+[node name="Character" parent="." instance=ExtResource("1_rapfa")]
+position = Vector2(72, 384)
 
 [node name="Start" type="Node2D" parent="."]
-position = Vector2(16, 471)
+position = Vector2(64, 448)
 
 [node name="End" type="StaticBody2D" parent="." groups=["goal"]]
 collision_layer = 8
 script = ExtResource("4_7pf31")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="End"]
-position = Vector2(1832.25, 283.25)
+position = Vector2(4040, 232)
 shape = SubResource("RectangleShape2D_ug4if")
 debug_color = Color(0.309561, 0.613737, 0.370076, 0.42)
 
@@ -100,9 +61,190 @@ debug_color = Color(0.309561, 0.613737, 0.370076, 0.42)
 offset_right = 40.0
 offset_bottom = 40.0
 color = Color(0.243466, 0.545487, 0.364072, 1)
+metadata/_edit_use_anchors_ = true
 
-[node name="Character" parent="." instance=ExtResource("1_rapfa")]
-position = Vector2(75, 389)
+[node name="Floor1" type="StaticBody2D" parent="."]
+collision_layer = 2
+script = ExtResource("4_7pf31")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor1"]
+position = Vector2(192, 480)
+shape = SubResource("RectangleShape2D_fruhu")
+
+[node name="ColorRect" type="ColorRect" parent="Floor1"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.462745, 0.509804, 0.827451, 1)
+
+[node name="Hazard1" type="StaticBody2D" parent="." groups=["hazard"]]
+collision_layer = 4
+script = ExtResource("4_7pf31")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard1"]
+position = Vector2(432, 480)
+shape = SubResource("RectangleShape2D_xjqpe")
+debug_color = Color(0.890877, 0.300042, 0.329821, 0.42)
+
+[node name="ColorRect" type="ColorRect" parent="Hazard1"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.737255, 0.298039, 0.223529, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Floor2" type="StaticBody2D" parent="."]
+collision_layer = 2
+script = ExtResource("4_7pf31")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor2"]
+position = Vector2(552, 480)
+shape = SubResource("RectangleShape2D_uwnvl")
+
+[node name="ColorRect" type="ColorRect" parent="Floor2"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.464363, 0.511613, 0.827328, 1)
+
+[node name="Hazard2" type="StaticBody2D" parent="." groups=["hazard"]]
+collision_layer = 4
+script = ExtResource("4_7pf31")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard2"]
+position = Vector2(1696.06, 264)
+shape = SubResource("RectangleShape2D_4bu4v")
+debug_color = Color(0.890877, 0.300042, 0.329821, 0.42)
+
+[node name="ColorRect" type="ColorRect" parent="Hazard2"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.737944, 0.299102, 0.223276, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Hazard3" type="StaticBody2D" parent="." groups=["hazard"]]
+collision_layer = 4
+script = ExtResource("4_7pf31")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard3"]
+position = Vector2(672, 480)
+shape = SubResource("RectangleShape2D_xjqpe")
+debug_color = Color(0.890877, 0.300042, 0.329821, 0.42)
+
+[node name="ColorRect" type="ColorRect" parent="Hazard3"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.737255, 0.298039, 0.223529, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Floor3" type="StaticBody2D" parent="."]
+collision_layer = 2
+script = ExtResource("4_7pf31")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor3"]
+position = Vector2(2416, 480)
+shape = SubResource("RectangleShape2D_1s248")
+
+[node name="ColorRect" type="ColorRect" parent="Floor3"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.464363, 0.511613, 0.827328, 1)
+
+[node name="Hazard4" type="StaticBody2D" parent="." groups=["hazard"]]
+collision_layer = 4
+script = ExtResource("4_7pf31")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard4"]
+position = Vector2(2144.03, 288)
+shape = SubResource("RectangleShape2D_tla6a")
+debug_color = Color(0.890877, 0.300042, 0.329821, 0.42)
+
+[node name="ColorRect" type="ColorRect" parent="Hazard4"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.737944, 0.299102, 0.223276, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Hazard8" type="StaticBody2D" parent="." groups=["hazard"]]
+collision_layer = 4
+script = ExtResource("4_7pf31")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard8"]
+position = Vector2(3328, 356)
+shape = SubResource("RectangleShape2D_1ednv")
+debug_color = Color(0.890877, 0.300042, 0.329821, 0.42)
+
+[node name="ColorRect" type="ColorRect" parent="Hazard8"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.737944, 0.299102, 0.223276, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Floor4" type="StaticBody2D" parent="."]
+collision_layer = 2
+script = ExtResource("4_7pf31")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor4"]
+position = Vector2(3344, 416)
+shape = SubResource("RectangleShape2D_vligy")
+
+[node name="ColorRect" type="ColorRect" parent="Floor4"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.464363, 0.511613, 0.827328, 1)
+
+[node name="Floor5" type="StaticBody2D" parent="."]
+collision_layer = 2
+script = ExtResource("4_7pf31")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor5"]
+position = Vector2(3612, 352)
+shape = SubResource("RectangleShape2D_vligy")
+
+[node name="ColorRect" type="ColorRect" parent="Floor5"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.464363, 0.511613, 0.827328, 1)
+
+[node name="Hazard6" type="StaticBody2D" parent="." groups=["hazard"]]
+collision_layer = 4
+script = ExtResource("4_7pf31")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard6"]
+position = Vector2(3060.02, 420)
+shape = SubResource("RectangleShape2D_1ednv")
+debug_color = Color(0.890877, 0.300042, 0.329821, 0.42)
+
+[node name="ColorRect" type="ColorRect" parent="Hazard6"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.737944, 0.299102, 0.223276, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Hazard7" type="StaticBody2D" parent="." groups=["hazard"]]
+collision_layer = 4
+script = ExtResource("4_7pf31")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard7"]
+position = Vector2(3404, 292)
+shape = SubResource("RectangleShape2D_1ednv")
+debug_color = Color(0.890877, 0.300042, 0.329821, 0.42)
+
+[node name="ColorRect" type="ColorRect" parent="Hazard7"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.737944, 0.299102, 0.223276, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Floor6" type="StaticBody2D" parent="."]
+collision_layer = 2
+script = ExtResource("4_7pf31")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor6"]
+position = Vector2(3688, 288)
+shape = SubResource("RectangleShape2D_vligy")
+
+[node name="ColorRect" type="ColorRect" parent="Floor6"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.464363, 0.511613, 0.827328, 1)
 
 [connection signal="action_selected" from="PauseMenu" to="Character" method="_on_pause_menu_action_selected"]
 [connection signal="hit_hazard" from="Character" to="." method="_on_character_hit_hazard"]

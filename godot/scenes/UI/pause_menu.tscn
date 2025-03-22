@@ -49,13 +49,13 @@ layout_mode = 2
 theme_override_constants/separation = 10
 script = ExtResource("2_n8bip")
 
+[node name="None" parent="MarginContainer/VBoxContainer/ActionList" instance=ExtResource("1_mujrc")]
+layout_mode = 2
+
 [node name="Jump" parent="MarginContainer/VBoxContainer/ActionList" instance=ExtResource("1_mujrc")]
 layout_mode = 2
 
 [node name="Crouch" parent="MarginContainer/VBoxContainer/ActionList" instance=ExtResource("1_mujrc")]
-layout_mode = 2
-
-[node name="None" parent="MarginContainer/VBoxContainer/ActionList" instance=ExtResource("1_mujrc")]
 layout_mode = 2
 
 [node name="Resume" type="Button" parent="MarginContainer/VBoxContainer" groups=["ScopeOptions"]]

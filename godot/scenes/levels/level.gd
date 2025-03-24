@@ -11,6 +11,7 @@ func _ready() -> void:
 	$Camera2D.target = $Character
 
 func reset() -> void:
+	$Character.direction = 1
 	$Character.position = $Start.position
 	$Camera2D.position.x = $Start.position.x
 

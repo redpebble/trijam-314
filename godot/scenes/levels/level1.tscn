@@ -50,6 +50,7 @@ script = ExtResource("2_p0ldi")
 metadata/_edit_lock_ = true
 
 [node name="PauseMenu" parent="." instance=ExtResource("2_nep4c")]
+visible = false
 
 [node name="Character" parent="." instance=ExtResource("1_rapfa")]
 

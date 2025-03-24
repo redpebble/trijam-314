@@ -42,11 +42,11 @@ func _process(_delta: float) -> void:
 
 		match collider.collision_type:
 			LevelGeometry.Type.NEUTRAL: hit_wall = true
-			LevelGeometry.Type.HAZARD: hit_hazard.emit()
-			LevelGeometry.Type.GOAL:   hit_goal.emit()
+			LevelGeometry.Type.HAZARD:  hit_hazard.emit()
+			LevelGeometry.Type.GOAL:    hit_goal.emit()
 
 func rebound():
-	if hit_wall_pos == position:
+	if hit_wall_pos != null && hit_wall_pos.x == position.x:
 		direction *= -1 # reverse direction
 
 	hit_wall_pos = position

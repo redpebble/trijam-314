@@ -4,6 +4,7 @@ extends CharacterBody2D
 enum Action { NONE, JUMP, CROUCH }
 
 signal hit_hazard
+signal hit_goal
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -42,7 +43,7 @@ func _process(_delta: float) -> void:
 		match collider.collision_type:
 			LevelGeometry.Type.NEUTRAL: hit_wall = true
 			LevelGeometry.Type.HAZARD: hit_hazard.emit()
-			LevelGeometry.Type.GOAL:   hit_hazard.emit() # next level
+			LevelGeometry.Type.GOAL:   hit_goal.emit()
 
 func rebound():
 	if hit_wall_pos == position:

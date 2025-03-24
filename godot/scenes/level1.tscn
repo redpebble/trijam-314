@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bpwlmjan0tmis"]
+[gd_scene load_steps=17 format=3 uid="uid://bpwlmjan0tmis"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_1g0je"]
 [ext_resource type="PackedScene" uid="uid://d1a3impy5lljt" path="res://scenes/character.tscn" id="1_rapfa"]
@@ -27,17 +27,14 @@ size = Vector2(968, 64)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_krlpe"]
 size = Vector2(632, 64)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ckfn6"]
-size = Vector2(408, 64)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xjqpe"]
 size = Vector2(96, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4bu4v"]
-size = Vector2(575.875, 208)
+size = Vector2(447.877, 208)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tla6a"]
-size = Vector2(319.938, 256)
+size = Vector2(191.969, 256)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1ednv"]
 size = Vector2(8, 56)
@@ -97,10 +94,6 @@ shape = SubResource("RectangleShape2D_ophq7")
 position = Vector2(3716, 352)
 shape = SubResource("RectangleShape2D_krlpe")
 
-[node name="CollisionShape2D7" type="CollisionShape2D" parent="Geometry/Floors"]
-position = Vector2(2648, 296)
-shape = SubResource("RectangleShape2D_ckfn6")
-
 [node name="Hazards" type="StaticBody2D" parent="Geometry"]
 collision_layer = 4
 script = ExtResource("4_7pf31")
@@ -112,7 +105,7 @@ shape = SubResource("RectangleShape2D_xjqpe")
 debug_color = Color(0.890877, 0.300042, 0.329821, 0.42)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Geometry/Hazards"]
-position = Vector2(1696.06, 264)
+position = Vector2(1504, 264)
 shape = SubResource("RectangleShape2D_4bu4v")
 debug_color = Color(0.890877, 0.300042, 0.329821, 0.42)
 
@@ -122,7 +115,7 @@ shape = SubResource("RectangleShape2D_xjqpe")
 debug_color = Color(0.890877, 0.300042, 0.329821, 0.42)
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Geometry/Hazards"]
-position = Vector2(2144.03, 288)
+position = Vector2(1823.95, 288)
 shape = SubResource("RectangleShape2D_tla6a")
 debug_color = Color(0.890877, 0.300042, 0.329821, 0.42)
 

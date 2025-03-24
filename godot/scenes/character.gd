@@ -9,6 +9,9 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
 var controller_state := Action.NONE
+var direction = 1 # 1 for right, -1 for left
+var hit_wall_pos = null
+var hit_wall = false
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -17,7 +20,11 @@ func _physics_process(delta: float) -> void:
 	if controller_state == Action.JUMP and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
-	velocity.x = SPEED
+	if hit_wall:
+		hit_wall = false
+		rebound()
+
+	velocity.x = SPEED * direction
 
 	move_and_slide()
 
@@ -33,8 +40,15 @@ func _process(_delta: float) -> void:
 			continue
 
 		match collider.collision_type:
+			LevelGeometry.Type.NEUTRAL: hit_wall = true
 			LevelGeometry.Type.HAZARD: hit_hazard.emit()
-			LevelGeometry.Type.GOAL:   hit_hazard.emit()
+			LevelGeometry.Type.GOAL:   hit_hazard.emit() # next level
+
+func rebound():
+	if hit_wall_pos == position:
+		direction *= -1 # reverse direction
+
+	hit_wall_pos = position
 
 func _on_pause_menu_action_selected(action:String) -> void:
 	controller_state = Action.get(action)

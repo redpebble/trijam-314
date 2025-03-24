@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="PauseRunner"
+config/name="TAS Dash"
 run/main_scene="res://scenes/level1.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -19,11 +19,6 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=1000
 window/size/viewport_height=600
-
-[global_group]
-
-goal=""
-hazard=""
 
 [input]
 

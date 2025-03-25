@@ -1,18 +1,18 @@
-class_name Character
+class_name Player
 extends CharacterBody2D
 
 enum Action { NONE, JUMP, CROUCH }
 
-signal hit_hazard
-signal hit_goal
+signal contact_detected(area: DetectorArea)
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
 var controller_state := Action.NONE
 var direction = 1 # 1 for right, -1 for left
+var hit_wall := false
 var hit_wall_pos = null
-var hit_wall = false
+var hit_wall_n := 0
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -40,14 +40,16 @@ func _process(_delta: float) -> void:
 		if not collider is LevelGeometry:
 			continue
 
-		match collider.collision_type:
-			LevelGeometry.Type.NEUTRAL: hit_wall = true
-			LevelGeometry.Type.HAZARD:  hit_hazard.emit()
-			LevelGeometry.Type.GOAL:    hit_goal.emit()
+		hit_wall = true
+		contact_detected.emit(collider)
 
 func rebound():
 	if hit_wall_pos != null && hit_wall_pos.x == position.x:
-		direction *= -1 # reverse direction
+		hit_wall_n += 1
+
+	if hit_wall_n > 2:
+		direction *= 1
+		hit_wall_n = 0
 
 	hit_wall_pos = position
 

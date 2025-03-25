@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://bt6rxh6q2uvoj"]
+[gd_scene load_steps=14 format=3 uid="uid://bt6rxh6q2uvoj"]
 
 [ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_lqjkl"]
 [ext_resource type="Script" path="res://scenes/camera.gd" id="2_2o17f"]
 [ext_resource type="PackedScene" uid="uid://l1np6ys8mw12" path="res://scenes/UI/pause_menu.tscn" id="3_m02jb"]
-[ext_resource type="PackedScene" uid="uid://d1a3impy5lljt" path="res://scenes/character.tscn" id="4_kl67p"]
+[ext_resource type="PackedScene" uid="uid://d1a3impy5lljt" path="res://scenes/player.tscn" id="4_kl67p"]
 [ext_resource type="Script" path="res://scenes/level_geometry.gd" id="5_dbheq"]
+[ext_resource type="Script" path="res://scenes/detector_area.gd" id="6_faxjx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h4uho"]
 size = Vector2(440, 40)
@@ -30,15 +31,15 @@ size = Vector2(40, 120)
 [node name="Level2" type="Node2D"]
 script = ExtResource("1_lqjkl")
 
+[node name="PauseMenu" parent="." instance=ExtResource("3_m02jb")]
+visible = false
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(500, 300)
 script = ExtResource("2_2o17f")
 metadata/_edit_lock_ = true
 
-[node name="PauseMenu" parent="." instance=ExtResource("3_m02jb")]
-visible = false
-
-[node name="Character" parent="." instance=ExtResource("4_kl67p")]
+[node name="Player" parent="." instance=ExtResource("4_kl67p")]
 
 [node name="Start" type="Node2D" parent="."]
 position = Vector2(64, 280)
@@ -65,20 +66,20 @@ shape = SubResource("RectangleShape2D_1nnca")
 position = Vector2(1670, 350)
 shape = SubResource("RectangleShape2D_m6y6t")
 
-[node name="Hazard" type="StaticBody2D" parent="Geometry"]
+[node name="Hazard" type="Area2D" parent="Geometry"]
 collision_layer = 4
-script = ExtResource("5_dbheq")
-collision_type = 1
+script = ExtResource("6_faxjx")
+effect_type = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Hazard"]
 position = Vector2(940, 335)
 shape = SubResource("RectangleShape2D_xjqpe")
 debug_color = Color(0.890877, 0.300042, 0.329821, 0.42)
 
-[node name="Goal" type="StaticBody2D" parent="Geometry"]
+[node name="Goal" type="Area2D" parent="Geometry"]
 collision_layer = 8
-script = ExtResource("5_dbheq")
-collision_type = 2
+script = ExtResource("6_faxjx")
+effect_type = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Goal"]
 position = Vector2(20, 350)
@@ -90,4 +91,4 @@ position = Vector2(2380, 220)
 shape = SubResource("RectangleShape2D_vif6t")
 debug_color = Color(0.309561, 0.613737, 0.370076, 0.42)
 
-[connection signal="action_selected" from="PauseMenu" to="Character" method="_on_pause_menu_action_selected"]
+[connection signal="action_selected" from="PauseMenu" to="Player" method="_on_pause_menu_action_selected"]

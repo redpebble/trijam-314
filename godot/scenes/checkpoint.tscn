@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://gqvqt3121knt"]
+
+[ext_resource type="Script" path="res://scenes/level_geometry.gd" id="1_v8rkq"]
+
+[node name="Checkpoint" type="StaticBody2D"]
+collision_mask = 0
+script = ExtResource("1_v8rkq")
+collision_type = 2

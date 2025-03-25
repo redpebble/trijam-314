@@ -6,7 +6,7 @@ enum Action { NONE, JUMP, CROUCH }
 signal hit_hazard
 signal hit_goal
 
-const SPEED = 300.0
+const MAX_SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
 var controller_state := Action.NONE
@@ -25,7 +25,7 @@ func _physics_process(delta: float) -> void:
 		hit_wall = false
 		rebound()
 
-	velocity.x = SPEED * direction
+	velocity.x = MAX_SPEED * direction
 
 	move_and_slide()
 
@@ -53,3 +53,6 @@ func rebound():
 
 func _on_pause_menu_action_selected(action:String) -> void:
 	controller_state = Action.get(action)
+
+func get_speed_scale() -> float:
+	return velocity.x / MAX_SPEED

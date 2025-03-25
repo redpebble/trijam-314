@@ -11,7 +11,13 @@ size = Vector2(20, 80)
 
 [node name="Character" type="CharacterBody2D"]
 collision_mask = 14
+safe_margin = 0.1
 script = ExtResource("1_fg13i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-4.76837e-07, -20)
+scale = Vector2(0.555556, 0.5)
+texture = ExtResource("2_ig1xc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(5, -20)
@@ -27,8 +33,3 @@ shape = SubResource("CapsuleShape2D_ygktd")
 position = Vector2(0, -20)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_egari")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-4.76837e-07, -20)
-scale = Vector2(0.555556, 0.5)
-texture = ExtResource("2_ig1xc")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bda08ke6sjnvy"]
+
+[ext_resource type="Script" path="res://Singletons/screenshot_tool.gd" id="1_ny26b"]
+
+[node name="ScreenshotTool" type="Node"]
+script = ExtResource("1_ny26b")

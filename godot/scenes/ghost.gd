@@ -70,6 +70,7 @@ func set_state(_state):
 
 func _on_player_contact_detected(area : DetectorArea):
 	match area.effect_type:
-		Level.EffectType.HAZARD: last_run_result = states.DEAD
-		Level.EffectType.GOAL:   last_run_result = states.GOAL_REACHED
+		Level.EffectType.CHECKPOINT: current_run.clear()
+		Level.EffectType.HAZARD:     last_run_result = states.DEAD
+		Level.EffectType.GOAL:       last_run_result = states.GOAL_REACHED
 	start_new_run()

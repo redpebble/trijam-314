@@ -11,7 +11,7 @@ var progress_index : int = 0
 
 enum states {DEFAULT, DEAD, GOAL_REACHED}
 var state = states.DEFAULT : set = set_state
-var last_run_result = states.DEFAULT : set = set_last_run_result
+var last_run_result = states.DEFAULT
 
 
 
@@ -19,10 +19,7 @@ func _ready() -> void:
 	top_level = true # useful if parented by a moving node
 	modulate.a = 0.5
 	# Connect to character signals
-	player.hit_hazard.connect(set_last_run_result.bind(states.DEAD))
-	player.hit_hazard.connect(start_new_run)
-	player.hit_goal.connect(set_last_run_result.bind(states.GOAL_REACHED))
-	player.hit_goal.connect(start_new_run)
+	player.contact_detected.connect(_on_player_contact_detected)
 
 
 func _physics_process(_delta: float) -> void:
@@ -71,5 +68,8 @@ func set_state(_state):
 		states.GOAL_REACHED:
 			sprite.modulate = Color.LIME_GREEN
 
-func set_last_run_result(_last_run_result):
-	last_run_result = _last_run_result
+func _on_player_contact_detected(area : DetectorArea):
+	match area.effect_type:
+		Level.EffectType.HAZARD: last_run_result = states.DEAD
+		Level.EffectType.GOAL:   last_run_result = states.GOAL_REACHED
+	start_new_run()

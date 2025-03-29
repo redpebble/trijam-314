@@ -2,7 +2,7 @@ extends Camera2D
 
 var target: Node2D = null
 var lookahead : float = 200.0
-var speed = 10
+var speed = 6.5
 
 func _physics_process(delta: float) -> void:
 	if (!target): return

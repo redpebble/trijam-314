@@ -1,11 +1,12 @@
-[gd_scene load_steps=18 format=3 uid="uid://bpwlmjan0tmis"]
+[gd_scene load_steps=19 format=3 uid="uid://bpwlmjan0tmis"]
 
 [ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_1g0je"]
-[ext_resource type="PackedScene" uid="uid://d1a3impy5lljt" path="res://scenes/character.tscn" id="1_rapfa"]
+[ext_resource type="PackedScene" uid="uid://w5v3ec1ysqdd" path="res://scenes/character.tscn" id="1_rapfa"]
 [ext_resource type="PackedScene" uid="uid://bt6rxh6q2uvoj" path="res://scenes/levels/level2.tscn" id="2_jint4"]
 [ext_resource type="PackedScene" uid="uid://l1np6ys8mw12" path="res://scenes/UI/pause_menu.tscn" id="2_nep4c"]
 [ext_resource type="Script" path="res://scenes/camera.gd" id="2_p0ldi"]
 [ext_resource type="Script" path="res://scenes/level_geometry.gd" id="4_7pf31"]
+[ext_resource type="PackedScene" uid="uid://bas4p1y806k6r" path="res://scenes/ghost.tscn" id="6_fekqb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h4uho"]
 size = Vector2(380, 40)
@@ -53,6 +54,8 @@ metadata/_edit_lock_ = true
 visible = false
 
 [node name="Character" parent="." instance=ExtResource("1_rapfa")]
+
+[node name="Ghost" parent="." instance=ExtResource("6_fekqb")]
 
 [node name="Start" type="Node2D" parent="."]
 position = Vector2(80, 440)

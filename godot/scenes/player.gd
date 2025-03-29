@@ -23,7 +23,7 @@ func _physics_process(delta: float) -> void:
 	if is_on_wall() && !just_died:
 		direction *= -1
 	just_died = false
-	
+
 	velocity.x = MAX_SPEED * direction
 
 	move_and_slide()

@@ -1,13 +1,13 @@
 extends HBoxContainer
 
-@onready var button_nodes : Array[Node] = self.get_children()
+@onready var button_nodes : Array = self.get_children()
 
 func _ready() -> void:
 	connect_signals()
 	button_nodes[0].button_pressed = true
 
-func _on_button_selected(b):
-	var other_buttons = button_nodes.duplicate()
+func _on_button_selected(b : Button):
+	var other_buttons := button_nodes.duplicate()
 	other_buttons.erase(b)
 	for i in other_buttons:
 		i.button_pressed = false

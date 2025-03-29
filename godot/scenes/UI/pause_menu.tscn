@@ -51,6 +51,7 @@ script = ExtResource("2_n8bip")
 
 [node name="None" parent="MarginContainer/VBoxContainer/ActionList" instance=ExtResource("1_mujrc")]
 layout_mode = 2
+button_pressed = true
 
 [node name="Jump" parent="MarginContainer/VBoxContainer/ActionList" instance=ExtResource("1_mujrc")]
 layout_mode = 2

@@ -1,7 +1,7 @@
 class_name Ghost
 extends Node2D
 
-@export_range(0, 100, 5) var replay_lead = 30 # frames of physics ahead of player
+@export_range(0, 100, 5) var replay_lead = 30 #recorded instances skipped
 
 @onready var player : Player = get_parent()
 @onready var sprite := $Sprite
@@ -13,14 +13,14 @@ var progress_index : int = 0
 
 enum states {DEFAULT, DEAD, GOAL_REACHED}
 var state = states.DEFAULT : set = set_state
-var replay_run_result = states.DEFAULT
+var replay_run_result = states.DEFAULT #the state at the end of the replay
 
 
 
 func _ready() -> void:
-	top_level = true # decouple from parent traits
+	top_level = true #decouple from parent traits
 	modulate.a = 0.5
-	# Connect to character signals
+	#connect to character signals
 	player.contact_detected.connect(_on_player_contact_detected)
 
 
@@ -67,6 +67,7 @@ func set_state(_state):
 			sprite.modulate = Color.INDIAN_RED
 		states.GOAL_REACHED:
 			sprite.modulate = Color.LIME_GREEN
+
 
 func _on_player_contact_detected(area : DetectorArea):
 	match area.effect_type:

@@ -12,7 +12,7 @@
 size = Vector2(380, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fvpop"]
-size = Vector2(360, 60)
+size = Vector2(344, 56)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4g0sq"]
 size = Vector2(140, 40)
@@ -21,10 +21,10 @@ size = Vector2(140, 40)
 size = Vector2(2120, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vdgdn"]
-size = Vector2(800, 60)
+size = Vector2(800, 56)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i8lct"]
-size = Vector2(435, 60)
+size = Vector2(435, 56)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xjqpe"]
 size = Vector2(100, 40)
@@ -36,13 +36,13 @@ size = Vector2(240, 430)
 size = Vector2(160, 450)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cahgp"]
-size = Vector2(10, 50)
+size = Vector2(16, 56)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xk6cy"]
 size = Vector2(20, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g61o1"]
-size = Vector2(40, 120)
+size = Vector2(40, 132)
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_1g0je")
@@ -72,7 +72,7 @@ position = Vector2(190, 460)
 shape = SubResource("RectangleShape2D_h4uho")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Geometry/Neutral"]
-position = Vector2(2660, 290)
+position = Vector2(2668, 300)
 shape = SubResource("RectangleShape2D_fvpop")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Geometry/Neutral"]
@@ -84,11 +84,11 @@ position = Vector2(1780, 460)
 shape = SubResource("RectangleShape2D_23iwg")
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="Geometry/Neutral"]
-position = Vector2(2440, 410)
+position = Vector2(2440, 412)
 shape = SubResource("RectangleShape2D_vdgdn")
 
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="Geometry/Neutral"]
-position = Vector2(2622.5, 350)
+position = Vector2(2622.5, 356)
 shape = SubResource("RectangleShape2D_i8lct")
 
 [node name="Hazard" type="Area2D" parent="Geometry"]
@@ -116,17 +116,17 @@ shape = SubResource("RectangleShape2D_i2hek")
 debug_color = Color(0.890877, 0.300042, 0.329821, 0.42)
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="Geometry/Hazard"]
-position = Vector2(2405, 355)
+position = Vector2(2405, 356)
 shape = SubResource("RectangleShape2D_cahgp")
 debug_color = Color(0.890877, 0.300042, 0.329821, 0.42)
 
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="Geometry/Hazard"]
-position = Vector2(2040, 415)
+position = Vector2(2040, 412)
 shape = SubResource("RectangleShape2D_cahgp")
 debug_color = Color(0.890877, 0.300042, 0.329821, 0.42)
 
 [node name="CollisionShape2D7" type="CollisionShape2D" parent="Geometry/Hazard"]
-position = Vector2(2480, 295)
+position = Vector2(2496, 300)
 shape = SubResource("RectangleShape2D_cahgp")
 debug_color = Color(0.890877, 0.300042, 0.329821, 0.42)
 
@@ -146,7 +146,7 @@ script = ExtResource("7_7y1ki")
 effect_type = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Goal"]
-position = Vector2(2820, 200)
+position = Vector2(2820, 206)
 shape = SubResource("RectangleShape2D_g61o1")
 debug_color = Color(0.309561, 0.613737, 0.370076, 0.42)
 

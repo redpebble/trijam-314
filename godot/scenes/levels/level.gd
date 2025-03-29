@@ -25,7 +25,7 @@ func kill_player() -> void:
 	camera.position.x = spawn.x
 
 func set_checkpoint(cp_area) -> void:
-	var point = cp_area.get_node("Point")
+	var point = cp_area.find_child("Point")
 	if point:
 		spawn = point.position
 		return
@@ -46,7 +46,7 @@ func load_next_level() -> void:
 		load_lock = false
 		return
 
-	get_tree().change_scene_to_packed(next_level_res)
+	get_tree().call_deferred("change_scene_to_packed", next_level_res)
 
 func _on_player_contact_detected(area: DetectorArea):
 	match area.effect_type:

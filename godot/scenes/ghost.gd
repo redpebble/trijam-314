@@ -1,43 +1,43 @@
 class_name Ghost
 extends Node2D
 
+@export_range(0, 100, 5) var replay_lead = 30 # frames of physics ahead of player
+
 @onready var player : Player = get_parent()
 @onready var sprite := $Sprite
 
 var current_run : Array = []
-var last_run : Array = []
+var replay_run : Array = []
 var best_run : Array = []
 var progress_index : int = 0
 
 enum states {DEFAULT, DEAD, GOAL_REACHED}
 var state = states.DEFAULT : set = set_state
-var last_run_result = states.DEFAULT
+var replay_run_result = states.DEFAULT
 
 
 
 func _ready() -> void:
-	top_level = true # useful if parented by a moving node
+	top_level = true # decouple from parent traits
 	modulate.a = 0.5
 	# Connect to character signals
 	player.contact_detected.connect(_on_player_contact_detected)
 
 
 func _physics_process(_delta: float) -> void:
-	print(global_position)
 	current_run.append(player.global_transform)
 	
-	if last_run.is_empty():
+	if replay_run.is_empty():
 		hide()
 		return
 	else:
 		show()
 	
-	if progress_index >= last_run.size():
-		set_state(last_run_result)
-		return
+	if progress_index == replay_run.size()-1:
+		set_state(replay_run_result)
 	
-	global_transform = last_run[progress_index]
-	progress_index += 1
+	global_transform = replay_run[progress_index]
+	progress_index = min(progress_index + 1, replay_run.size()-1)
 
 
 
@@ -47,14 +47,14 @@ func add_run_progess(pos : Transform2D):
 # saves the current run then starts another
 func start_new_run():
 	if current_run.is_empty() : return
-	last_run = current_run.duplicate()
+	replay_run = current_run.duplicate()
 	current_run.clear()
-	progress_index = 20
+	progress_index = replay_lead
 	set_state(states.DEFAULT)
 
 func clear_all_runs():
 	current_run.clear()
-	last_run.clear()
+	replay_run.clear()
 
 
 # matches color to signify the current state
@@ -70,7 +70,11 @@ func set_state(_state):
 
 func _on_player_contact_detected(area : DetectorArea):
 	match area.effect_type:
-		Level.EffectType.CHECKPOINT: current_run.clear()
-		Level.EffectType.HAZARD:     last_run_result = states.DEAD
-		Level.EffectType.GOAL:       last_run_result = states.GOAL_REACHED
+		Level.EffectType.CHECKPOINT:
+			# erase progress before checkpoint
+			current_run.clear()
+		Level.EffectType.HAZARD:
+			replay_run_result = states.DEAD
+		Level.EffectType.GOAL:
+			replay_run_result = states.GOAL_REACHED
 	start_new_run()

@@ -5,4 +5,3 @@
 [node name="Checkpoint" type="StaticBody2D"]
 collision_mask = 0
 script = ExtResource("1_v8rkq")
-collision_type = 2

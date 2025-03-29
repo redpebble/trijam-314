@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://w5v3ec1ysqdd"]
+[gd_scene load_steps=6 format=3 uid="uid://w5v3ec1ysqdd"]
 
 [ext_resource type="Script" path="res://scenes/character.gd" id="1_fg13i"]
 [ext_resource type="Texture2D" uid="uid://dcls84yphic5e" path="res://assets/player.png" id="2_ig1xc"]
+[ext_resource type="PackedScene" uid="uid://bas4p1y806k6r" path="res://scenes/ghost.tscn" id="3_brh15"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ygktd"]
 height = 80.0
@@ -33,3 +34,5 @@ shape = SubResource("CapsuleShape2D_ygktd")
 position = Vector2(0, -20)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_egari")
+
+[node name="Ghost" parent="." instance=ExtResource("3_brh15")]

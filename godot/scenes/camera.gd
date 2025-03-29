@@ -7,4 +7,5 @@ var speed = 6.5
 func _physics_process(delta: float) -> void:
 	if (!target): return
 	var scaled_lookahead = lookahead * target.get_speed_scale()
-	position.x = lerp(position.x, target.position.x + scaled_lookahead, delta * speed)
+	# position.x = lerp(position.x, target.position.x + scaled_lookahead, delta * speed)
+	position.x = target.position.x

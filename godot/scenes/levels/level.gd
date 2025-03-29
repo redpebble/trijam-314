@@ -19,12 +19,12 @@ func reset():
 	kill_player()
 
 func kill_player() -> void:
+	player.just_died = true
 	player.direction = 1
 	player.position = spawn
 	camera.position.x = spawn.x
 
 func set_checkpoint(cp_area) -> void:
-	print(cp_area.name)
 	var point = cp_area.get_node("Point")
 	if point:
 		spawn = point.position
@@ -49,7 +49,6 @@ func load_next_level() -> void:
 	get_tree().change_scene_to_packed(next_level_res)
 
 func _on_player_contact_detected(area: DetectorArea):
-	print(area.name)
 	match area.effect_type:
 		EffectType.HAZARD:     kill_player()
 		EffectType.CHECKPOINT: set_checkpoint(area)

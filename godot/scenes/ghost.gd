@@ -1,7 +1,7 @@
 class_name Ghost
 extends Node2D
 
-@onready var character : Character = get_parent()
+@onready var player : Player = get_parent()
 @onready var sprite := $Sprite
 
 var current_run : Array = []
@@ -19,15 +19,15 @@ func _ready() -> void:
 	top_level = true # useful if parented by a moving node
 	modulate.a = 0.5
 	# Connect to character signals
-	character.hit_hazard.connect(set_last_run_result.bind(states.DEAD))
-	character.hit_hazard.connect(start_new_run)
-	character.hit_goal.connect(set_last_run_result.bind(states.GOAL_REACHED))
-	character.hit_goal.connect(start_new_run)
+	player.hit_hazard.connect(set_last_run_result.bind(states.DEAD))
+	player.hit_hazard.connect(start_new_run)
+	player.hit_goal.connect(set_last_run_result.bind(states.GOAL_REACHED))
+	player.hit_goal.connect(start_new_run)
 
 
 func _physics_process(_delta: float) -> void:
 	print(global_position)
-	current_run.append(character.global_transform)
+	current_run.append(player.global_transform)
 	
 	if last_run.is_empty():
 		hide()

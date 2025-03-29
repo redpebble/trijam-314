@@ -1,11 +1,12 @@
-[gd_scene load_steps=18 format=3 uid="uid://bpwlmjan0tmis"]
+[gd_scene load_steps=20 format=3 uid="uid://bpwlmjan0tmis"]
 
 [ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_1g0je"]
-[ext_resource type="PackedScene" uid="uid://w5v3ec1ysqdd" path="res://scenes/character.tscn" id="1_rapfa"]
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="1_rapfa"]
 [ext_resource type="PackedScene" uid="uid://bt6rxh6q2uvoj" path="res://scenes/levels/level2.tscn" id="2_jint4"]
 [ext_resource type="PackedScene" uid="uid://l1np6ys8mw12" path="res://scenes/UI/pause_menu.tscn" id="2_nep4c"]
 [ext_resource type="Script" path="res://scenes/camera.gd" id="2_p0ldi"]
 [ext_resource type="Script" path="res://scenes/level_geometry.gd" id="4_7pf31"]
+[ext_resource type="Script" path="res://scenes/detector_area.gd" id="7_7y1ki"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h4uho"]
 size = Vector2(380, 40)
@@ -23,7 +24,7 @@ size = Vector2(2120, 40)
 size = Vector2(800, 60)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i8lct"]
-size = Vector2(430, 60)
+size = Vector2(435, 60)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xjqpe"]
 size = Vector2(100, 40)
@@ -37,6 +38,9 @@ size = Vector2(160, 450)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cahgp"]
 size = Vector2(10, 50)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xk6cy"]
+size = Vector2(20, 80)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g61o1"]
 size = Vector2(40, 120)
 
@@ -44,15 +48,15 @@ size = Vector2(40, 120)
 script = ExtResource("1_1g0je")
 next_level_res = ExtResource("2_jint4")
 
+[node name="PauseMenu" parent="." instance=ExtResource("2_nep4c")]
+visible = false
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(500, 300)
 script = ExtResource("2_p0ldi")
 metadata/_edit_lock_ = true
 
-[node name="PauseMenu" parent="." instance=ExtResource("2_nep4c")]
-visible = false
-
-[node name="Character" parent="." instance=ExtResource("1_rapfa")]
+[node name="Player" parent="." instance=ExtResource("1_rapfa")]
 
 [node name="Start" type="Node2D" parent="."]
 position = Vector2(80, 440)
@@ -84,13 +88,12 @@ position = Vector2(2440, 410)
 shape = SubResource("RectangleShape2D_vdgdn")
 
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="Geometry/Neutral"]
-position = Vector2(2625, 350)
+position = Vector2(2622.5, 350)
 shape = SubResource("RectangleShape2D_i8lct")
 
-[node name="Hazard" type="StaticBody2D" parent="Geometry"]
-collision_layer = 4
-script = ExtResource("4_7pf31")
-collision_type = 1
+[node name="Hazard" type="Area2D" parent="Geometry"]
+script = ExtResource("7_7y1ki")
+effect_type = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Hazard"]
 position = Vector2(430, 460)
@@ -113,7 +116,7 @@ shape = SubResource("RectangleShape2D_i2hek")
 debug_color = Color(0.890877, 0.300042, 0.329821, 0.42)
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="Geometry/Hazard"]
-position = Vector2(2410, 355)
+position = Vector2(2405, 355)
 shape = SubResource("RectangleShape2D_cahgp")
 debug_color = Color(0.890877, 0.300042, 0.329821, 0.42)
 
@@ -127,14 +130,24 @@ position = Vector2(2480, 295)
 shape = SubResource("RectangleShape2D_cahgp")
 debug_color = Color(0.890877, 0.300042, 0.329821, 0.42)
 
-[node name="Goal" type="StaticBody2D" parent="Geometry"]
-collision_layer = 8
-script = ExtResource("4_7pf31")
-collision_type = 2
+[node name="Checkpoint" type="Area2D" parent="Geometry"]
+collision_layer = 2
+script = ExtResource("7_7y1ki")
+effect_type = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Checkpoint"]
+position = Vector2(1750, 400)
+shape = SubResource("RectangleShape2D_xk6cy")
+debug_color = Color(0, 0.552941, 0.917647, 0.266667)
+
+[node name="Goal" type="Area2D" parent="Geometry"]
+collision_layer = 2
+script = ExtResource("7_7y1ki")
+effect_type = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Goal"]
 position = Vector2(2820, 200)
 shape = SubResource("RectangleShape2D_g61o1")
 debug_color = Color(0.309561, 0.613737, 0.370076, 0.42)
 
-[connection signal="action_selected" from="PauseMenu" to="Character" method="_on_pause_menu_action_selected"]
+[connection signal="action_selected" from="PauseMenu" to="Player" method="_on_pause_menu_action_selected"]

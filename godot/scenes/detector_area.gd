@@ -1,10 +1,11 @@
-class_name LevelGeometry
-extends StaticBody2D
+class_name DetectorArea
+extends Area2D
 
 @export var effect_type := Level.EffectType.NEUTRAL
 
 func _ready() -> void:
 	collision_layer = get_collider_layer()
+	connect("body_entered", _on_body_entered)
 
 	for child in get_children():
 		if not child is CollisionShape2D:
@@ -17,12 +18,16 @@ func _ready() -> void:
 
 		add_child(crect)
 
+func _on_body_entered(body: Node2D):
+	if body is Player:
+		body.contact_detected.emit(self)
+
 func get_rect_color():
 	match effect_type:
 		Level.EffectType.NEUTRAL:    return Color("7682d3")
-		Level.EffectType.HAZARD:     return Color("bc4c39")
+		Level.EffectType.HAZARD:     return Color("bc4c3999")
 		Level.EffectType.CHECKPOINT: return Color("008dea44")
-		Level.EffectType.GOAL:       return Color("3e8b5d")
+		Level.EffectType.GOAL:       return Color("3e8b5d88")
 
 func get_collider_layer():
 	match effect_type:

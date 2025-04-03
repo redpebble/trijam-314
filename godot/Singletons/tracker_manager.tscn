@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8vxln14jqylu"]
+
+[ext_resource type="Script" path="res://Singletons/tracker_manager.gd" id="1_ldkjg"]
+
+[node name="TrackerManager" type="Node"]
+script = ExtResource("1_ldkjg")

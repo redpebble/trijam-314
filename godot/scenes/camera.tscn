@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyqeve7k6f02m"]
+
+[ext_resource type="Script" path="res://scenes/camera.gd" id="1_snney"]
+
+[node name="Camera2D" type="Camera2D"]
+process_mode = 3
+position = Vector2(500, 300)
+process_callback = 0
+script = ExtResource("1_snney")
+metadata/_edit_lock_ = true

@@ -6,7 +6,7 @@ enum EffectType { NEUTRAL, HAZARD, CHECKPOINT, GOAL }
 @export var next_level_res: Resource
 @onready var player := $Player
 @onready var camera := $Camera2D
-@onready var spawn: Vector2 = $Start.position
+@onready var spawn: Vector2 = $Start.global_position
 
 func _ready() -> void:
 	player.connect("contact_detected", _on_player_contact_detected)
@@ -15,24 +15,24 @@ func _ready() -> void:
 	camera.target = player
 
 func reset():
-	spawn = $Start.position
+	spawn = $Start.global_position
 	kill_player()
 
 func kill_player() -> void:
 	player.just_died = true
 	player.direction = 1
-	player.position = spawn
-	camera.position.x = spawn.x
+	player.global_position = spawn
+	camera.global_position.x = spawn.x
 
 func set_checkpoint(cp_area) -> void:
 	var point = cp_area.find_child("Point")
 	if point:
-		spawn = point.position
+		spawn = point.global_position
 		return
 	
 	for child in cp_area.get_children():
 		if child is CollisionShape2D:
-			spawn = child.position
+			spawn = child.global_position
 			spawn.y += child.shape.size.y / 2
 			return
 

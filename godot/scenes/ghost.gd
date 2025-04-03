@@ -6,9 +6,11 @@ extends Node2D
 @onready var player : Player = get_parent()
 @onready var sprite := $Sprite
 
-var current_run : Array = []
-var replay_run : Array = []
-var best_run : Array = []
+var current_run : = []
+var current_run_vel := []
+var current_run_action := []
+var replay_run := []
+var best_run := []
 var progress_index : int = 0
 
 enum states {DEFAULT, DEAD, GOAL_REACHED}
@@ -26,6 +28,8 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	current_run.append(player.global_transform)
+	current_run_vel.append(player.velocity)
+	current_run_action.append(player.controller_state)
 	
 	if replay_run.is_empty():
 		hide()
@@ -39,10 +43,6 @@ func _physics_process(_delta: float) -> void:
 	global_transform = replay_run[progress_index]
 	progress_index = min(progress_index + 1, replay_run.size()-1)
 
-
-
-func add_run_progess(pos : Transform2D):
-	current_run.append(pos)
 
 # saves the current run then starts another
 func start_new_run():

@@ -35,6 +35,7 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="MenuLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 0
 text = "Game Paused"
@@ -43,6 +44,7 @@ label_settings = SubResource("LabelSettings_hf270")
 [node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="ActionList" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -59,7 +61,17 @@ layout_mode = 2
 [node name="Crouch" parent="MarginContainer/VBoxContainer/ActionList" instance=ExtResource("1_mujrc")]
 layout_mode = 2
 
+[node name="Timeline" type="HSlider" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+max_value = 1.0
+step = 0.01
+value = 1.0
+
 [node name="Resume" type="Button" parent="MarginContainer/VBoxContainer" groups=["ScopeOptions"]]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Resume"

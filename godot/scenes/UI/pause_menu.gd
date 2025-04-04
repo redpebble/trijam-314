@@ -31,7 +31,6 @@ func set_paused(state : bool):
 	get_tree().paused = is_paused
 	visible = is_paused
 	if not is_paused:
-		#print(rewind_value)
 		var action : String = action_list.get_selected_action().to_upper()
 		TrackerManager.rewind_by(rewind_value, false)
 		action_selected.emit(action)

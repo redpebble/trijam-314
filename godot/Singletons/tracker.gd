@@ -3,10 +3,10 @@ extends Node2D
 
 @onready var linked_node : Node2D = get_parent()
 
-var transform_record : = []
-var velocity_record := []
-var action_record := []
-var direction_record := []
+var universal_properties := ["global_transform"]
+var player_properties := ["velocity", "controller_state", "direction"]
+var records : Dictionary = {}
+
 
 
 func _ready() -> void:
@@ -14,6 +14,7 @@ func _ready() -> void:
 	tree_exited.connect(TrackerManager.trackers.erase.bind(self))
 	if linked_node is Player:
 		linked_node.contact_detected.connect(_on_player_contact_detected)
+	initialize_records()
 
 
 func _physics_process(_delta: float) -> void:
@@ -21,46 +22,47 @@ func _physics_process(_delta: float) -> void:
 
 
 func record():
-	transform_record.append(linked_node.global_transform)
-	if linked_node is Player:
-		velocity_record.append(linked_node.velocity)
-		action_record.append(linked_node.controller_state)
-		direction_record.append(linked_node.direction)
-	
-	if transform_record.size() > TrackerManager.MAX_REWIND:
-		transform_record.pop_front()
-		if linked_node is Player:
-			velocity_record.pop_front()
-			action_record.pop_front()
-			direction_record.pop_front()
+	for property in records.keys():
+		records[property].append(linked_node.get(property))
+	if get_record_size() > TrackerManager.MAX_REWIND:
+		for property in records.keys():
+			records[property].pop_front()
 
 
 func rewind(idx : int, preview : bool) -> void:
-	var rewind_limit = transform_record.size() - 1
+	var rewind_limit = get_record_size() - 1
 	if idx > rewind_limit:
 		idx = rewind_limit
 	var rewind_idx = rewind_limit - idx
 	# sync attributes to indexed state 
-	linked_node.transform = transform_record[rewind_idx]
-	if linked_node is Player:
-		linked_node.velocity = velocity_record[rewind_idx]
-		linked_node.controller_state = action_record[rewind_idx]
-		linked_node.direction = direction_record[rewind_idx]
-	if preview == false:
+	for property in records.keys():
+		linked_node.set(property, records[property][rewind_idx])
+	
+	if not preview:
 		# delete records after the rewind index
-		transform_record.resize(rewind_idx + 1)
-		velocity_record.resize(rewind_idx + 1)
-		action_record.resize(rewind_idx + 1)
-		direction_record.resize(rewind_idx + 1)
+		for property in records.keys():
+			records[property].resize(rewind_idx)
 
 
-func reset() -> void:
-	transform_record.clear()
-	velocity_record.clear()
-	action_record.clear()
+func initialize_records() -> void:
+	for p in universal_properties:
+		records[p] = []
+	if linked_node is Player:
+		for p in player_properties:
+			records[p] = []
+
+
+func get_record_size():
+	var nonspecific_property = records.keys()[0]
+	return records[nonspecific_property].size()
+
+
+func reset_records() -> void:
+	for property in records.keys():
+		records[property].clear()
 
 
 func _on_player_contact_detected(area : DetectorArea):
 	if area.effect_type == Level.EffectType.HAZARD \
 	or area.effect_type == Level.EffectType.GOAL:
-		reset()
+		reset_records()

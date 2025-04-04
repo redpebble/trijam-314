@@ -13,4 +13,4 @@ func rewind_by(amount : float, preview : bool):
 		t.rewind(frame_count, preview)
 
 func get_record_size() -> int:
-	return trackers[0].transform_record.size()
+	return trackers[0].get_record_size()
